@@ -1,21 +1,23 @@
 var scene, camera, renderer;
 var pyramidGeometry, material, mesh;
+var THREE;
 
 init();
 animate();
 
-function init() {
+function init () {
 
 	scene = new THREE.Scene();
+	scene.background = new THREE.Color(0xffffff);
 
-	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000);
 	camera.position.set(0, 0, 10);
 	camera.lookAt(scene.position);
 	scene.add(camera);
 
 	pyramidGeometry = new THREE.CylinderGeometry(0, 1.5, 1.5, 4, false);
-	for(let i = 0; i < pyramidGeometry.faces.length; i++){
-		if(pyramidGeometry.faces[i] instanceof THREE.Face4){
+	for (let i = 0; i < pyramidGeometry.faces.length; i++) {
+		if(pyramidGeometry.faces[i] instanceof THREE.Face4) {
 			pyramidGeometry.faces[i].vertexColors[0] = new THREE.Color(0xFF0000);
 			if((i % 2) == 0){
 				pyramidGeometry.faces[i].vertexColors[1] = new THREE.Color(0x00FF00);
