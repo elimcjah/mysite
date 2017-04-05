@@ -1,6 +1,4 @@
-var scene, camera, renderer, material, mesh, controls;
-var pinkSide, tealSide;
-
+// TODO Move Trackball to another file, the pyramid 3d functions are at the bottom of this file.
 
 /**
  * 
@@ -610,16 +608,21 @@ THREE.TrackballControls = function ( object, domElement ) {
 THREE.TrackballControls.prototype = Object.create( THREE.EventDispatcher.prototype );
 THREE.TrackballControls.prototype.constructor = THREE.TrackballControls;
 
+var scene, camera, renderer, material, mesh, controls;
+var pinkSide, tealSide;
+var xDistance = 9.8;
+var yDistance = 4.8;
+var zDistance = 9.8;
+
+
 
 init();
 animate();
 addPyramids();
+render();
 
 
 function addPyramids () {
-	var xDistance = 15;
-	var yDistance = 4.8;
-	var zDistance = 15;
 	pinkSide = new THREE.CylinderGeometry(0, xDistance/2, yDistance, 4, false);
 	for (var t = 0; t < pinkSide.faces.length; t++) {
 		pinkSide.faces[0].color = new THREE.Color(0xff5ba5);
@@ -651,31 +654,51 @@ function addPyramids () {
 		mesh.position.x = (xOffset * -i);
 		mesh.position.y = (yDistance * i);
 		scene.add(mesh);
-		render();
 	}
-	for (var i = 0; i < 2; i++ ){
+	for (var j = 0; j < 2; j++ ){
 		mesh = new THREE.Mesh(pinkSide, material);
-		mesh.position.x = (xOffset * i) + xOffset;
-		mesh.position.y = (yDistance * i) + yDistance;
+		mesh.position.x = (xOffset * j) + xOffset;
+		mesh.position.y = (yDistance * j) + yDistance;
 		scene.add(mesh);
-		render();
 	}
-	for (var i = 3; i > 0; i-- ){
+	for (var k = 3; k > 0; k-- ){
 		mesh = new THREE.Mesh(tealSide, material);
-		mesh.position.x = (xOffset * -i) + 3 * xOffset;
-		mesh.position.y = (yDistance * i)+ yDistance * 2;
+		mesh.position.x = (xOffset * -k) + 3 * xOffset;
+		mesh.position.y = (yDistance * k)+ yDistance * 2;
 		mesh.scale.y = -1;
 		scene.add(mesh);
-		render();
 	}
-	for (var i = 2; i > 0; i-- ){
+	for (var m = 2; m > 0; m-- ){
 		mesh = new THREE.Mesh(tealSide, material);
-		mesh.position.x = (xOffset * i) - 3 * xOffset;
-		mesh.position.y = (yDistance * i)+ yDistance * 2;
+		mesh.position.x = (xOffset * m) - 3 * xOffset;
+		mesh.position.y = (yDistance * m)+ yDistance * 2;
 		mesh.scale.y = -1;
 		scene.add(mesh);
-		render();
 	}
+
+	// lets make a cube to test
+	var pyramid1 = new THREE.Mesh(tealSide, material);
+	pyramid1.position.y = yDistance * 2;
+	scene.add(pyramid1);
+	var pyramid2 = new THREE.Mesh(tealSide, material);
+	pyramid2.position.y = yDistance * 2 + yDistance;
+	pyramid2.scale.y = -1;
+	scene.add(pyramid2);
+	// var pyramid3 = new THREE.Mesh(tealSide, material);
+	// pyramid3.position.y = yDistance * 2.5;
+	// pyramid3.position.z = -yDistance;
+	// pyramid3.rotateX(1.5708);
+	// pyramid3.rotateY(0.785398);
+	// scene.add(pyramid3);
+	
+		
+	
+		// mesh.position.x = (xOffset * n) - 3 * xOffset;
+		// mesh.position.y = (yDistance * n)+ yDistance * 2;
+		// mesh.scale.y = -1;
+	// scene.add(mesh);
+	
+	
 }
 
 function init () {
@@ -689,7 +712,7 @@ function init () {
 	document.body.appendChild(renderer.domElement);
 
 	// Create camera.
-	camera = new THREE.PerspectiveCamera(5, 1, 1, 5000);
+	camera = new THREE.PerspectiveCamera(3, 1, 1, 5000);
 	// camera.position.y = ;
 	camera.position.z = window.innerWidth;
 	
