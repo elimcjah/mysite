@@ -1,5 +1,6 @@
-var scene, camera, renderer, material, controls;
-var pyramidGeometry;
+var scene, camera, renderer, material, mesh, controls;
+var pinkSide, tealSide;
+
 
 /**
  * 
@@ -613,39 +614,73 @@ THREE.TrackballControls.prototype.constructor = THREE.TrackballControls;
 init();
 animate();
 addPyramids();
-render();
+
 
 function addPyramids () {
-	var xDistance = 50;
-	var zDistance = 30;
-	pyramidGeometry = new THREE.CylinderGeometry(0, 0.8, 2, 4, false);
-	for (var t = 0; t < pyramidGeometry.faces.length; t++) {
-		pyramidGeometry.faces[0].color = new THREE.Color(0x3bc6b6);
-		pyramidGeometry.faces[1].color = new THREE.Color(0x3bc6b6);
-		pyramidGeometry.faces[2].color = new THREE.Color(0xff5ba5);
-		pyramidGeometry.faces[3].color = new THREE.Color(0xff5ba5);
-		pyramidGeometry.faces[4].color = new THREE.Color(0x9957cd);
-		pyramidGeometry.faces[5].color = new THREE.Color(0x9957cd);
-		pyramidGeometry.faces[6].color = new THREE.Color(0x9957cd);
-		pyramidGeometry.faces[7].color = new THREE.Color(0x9957cd);
+	var xDistance = 15;
+	var yDistance = 4.8;
+	var zDistance = 15;
+	pinkSide = new THREE.CylinderGeometry(0, xDistance/2, yDistance, 4, false);
+	for (var t = 0; t < pinkSide.faces.length; t++) {
+		pinkSide.faces[0].color = new THREE.Color(0xff5ba5);
+		pinkSide.faces[1].color = new THREE.Color(0x3bc6b6);
+		pinkSide.faces[2].color = new THREE.Color(0x3bc6b6);
+		pinkSide.faces[3].color = new THREE.Color(0xff5ba5);
+		pinkSide.faces[4].color = new THREE.Color(0x9957cd);
+		pinkSide.faces[5].color = new THREE.Color(0x9957cd);
+		pinkSide.faces[6].color = new THREE.Color(0x9957cd);
+		pinkSide.faces[7].color = new THREE.Color(0x9957cd);
+	}
+	tealSide = new THREE.CylinderGeometry(0, xDistance/2, yDistance, 4, false);
+	for (var t = 0; t < tealSide.faces.length; t++) {
+		tealSide.faces[0].color = new THREE.Color(0x3bc6b6);
+		tealSide.faces[1].color = new THREE.Color(0xff5ba5);
+		tealSide.faces[2].color = new THREE.Color(0xff5ba5);
+		tealSide.faces[3].color = new THREE.Color(0x3bc6b6);
+		tealSide.faces[4].color = new THREE.Color(0x9957cd);
+		tealSide.faces[5].color = new THREE.Color(0x9957cd);
+		tealSide.faces[6].color = new THREE.Color(0x9957cd);
+		tealSide.faces[7].color = new THREE.Color(0x9957cd);
 	}
 
 	material = new THREE.MeshBasicMaterial({ vertexColors: THREE.VertexColors, side: THREE.DoubleSide });
 
-	var xOffset = -80;
-
-	for (var i = 0; i < 4; i++) {
-		for (var j = 0; j < 3; j++) {
-			var mesh = new THREE.Mesh(pyramidGeometry, material);
-			mesh.position.x = (xDistance * i) + xOffset;
-			mesh.position.z = (zDistance * j);
-			scene.add(mesh);
-		}
+	var xOffset = xDistance/2;
+	for (var i = 0; i < 3; i++ ){
+		mesh = new THREE.Mesh(pinkSide, material);
+		mesh.position.x = (xOffset * -i);
+		mesh.position.y = (yDistance * i);
+		scene.add(mesh);
+		render();
 	}
-
+	for (var i = 0; i < 2; i++ ){
+		mesh = new THREE.Mesh(pinkSide, material);
+		mesh.position.x = (xOffset * i) + xOffset;
+		mesh.position.y = (yDistance * i) + yDistance;
+		scene.add(mesh);
+		render();
+	}
+	for (var i = 3; i > 0; i-- ){
+		mesh = new THREE.Mesh(tealSide, material);
+		mesh.position.x = (xOffset * -i) + 3 * xOffset;
+		mesh.position.y = (yDistance * i)+ yDistance * 2;
+		mesh.scale.y = -1;
+		scene.add(mesh);
+		render();
+	}
+	for (var i = 2; i > 0; i-- ){
+		mesh = new THREE.Mesh(tealSide, material);
+		mesh.position.x = (xOffset * i) - 3 * xOffset;
+		mesh.position.y = (yDistance * i)+ yDistance * 2;
+		mesh.scale.y = -1;
+		scene.add(mesh);
+		render();
+	}
 }
 
 function init () {
+	var width = window.innerWidth;
+	var height = window.innerHeight;
 
 	renderer = new THREE.WebGLRenderer({ alpha: true });
 	// renderer.setPixelRatio(window.devicePixelRatio);
@@ -654,10 +689,11 @@ function init () {
 	document.body.appendChild(renderer.domElement);
 
 	// Create camera.
-	camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-	camera.position.z = 100;
-
-	// Add controls
+	camera = new THREE.PerspectiveCamera(5, 1, 1, 5000);
+	// camera.position.y = ;
+	camera.position.z = window.innerWidth;
+	
+	//- Add controls
 	controls = new THREE.TrackballControls(camera);
 	controls.addEventListener('change', render);
 
