@@ -693,10 +693,7 @@ function addPyramids () {
 	// scene.add(pyramid3);
 	//
 	
-	
-	
-	
-	
+
 		// mesh.position.x = (xOffset * n) - 3 * xOffset;
 		// mesh.position.y = (yDistance * n)+ yDistance * 2;
 		// mesh.scale.y = -1;
