@@ -684,14 +684,18 @@ function addPyramids () {
 	pyramid2.position.y = yDistance * 2 + yDistance;
 	pyramid2.scale.y = -1;
 	scene.add(pyramid2);
+	
 	// var pyramid3 = new THREE.Mesh(tealSide, material);
 	// pyramid3.position.y = yDistance * 2.5;
 	// pyramid3.position.z = -yDistance;
 	// pyramid3.rotateX(1.5708);
 	// pyramid3.rotateY(0.785398);
 	// scene.add(pyramid3);
+	//
 	
-		
+	
+	
+	
 	
 		// mesh.position.x = (xOffset * n) - 3 * xOffset;
 		// mesh.position.y = (yDistance * n)+ yDistance * 2;
