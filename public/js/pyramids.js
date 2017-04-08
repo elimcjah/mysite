@@ -677,13 +677,13 @@ function addPyramids () {
 	}
 
 	// lets make a cube to test
-	var pyramid1 = new THREE.Mesh(tealSide, material);
-	pyramid1.position.y = yDistance * 2;
-	scene.add(pyramid1);
-	var pyramid2 = new THREE.Mesh(tealSide, material);
-	pyramid2.position.y = yDistance * 2 + yDistance;
-	pyramid2.scale.y = -1;
-	scene.add(pyramid2);
+	// var pyramid1 = new THREE.Mesh(tealSide, material);
+	// pyramid1.position.y = yDistance * 2;
+	// scene.add(pyramid1);
+	// var pyramid2 = new THREE.Mesh(tealSide, material);
+	// pyramid2.position.y = yDistance * 2 + yDistance;
+	// pyramid2.scale.y = -1;
+	// scene.add(pyramid2);
 	
 	// var pyramid3 = new THREE.Mesh(tealSide, material);
 	// pyramid3.position.y = yDistance * 2.5;
@@ -703,8 +703,8 @@ function addPyramids () {
 }
 
 function init () {
-	var width = window.innerWidth;
-	var height = window.innerHeight;
+	// var width = window.innerWidth;
+	// var height = window.innerHeight;
 
 	renderer = new THREE.WebGLRenderer({ alpha: true });
 	// renderer.setPixelRatio(window.devicePixelRatio);
