@@ -1,0 +1,29 @@
+extends ../layouts/default
+
+block content
+	.container: .row: .col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
+		article
+			p: a(href='/code') &larr; back to the Code Pages
+			hr
+			if !data.pages
+				h2 Invalid Code Page.
+			else
+				header
+					h1= data.pages.title
+					h5 Posted 
+						if data.pages.publishedDate
+							| on #{data.pages._.publishedDate.format('MMMM Do, YYYY')} 
+						if data.pages.categories && data.pages.categories.length
+							| in 
+							each cat, cat_i in data.pages.categories
+								a(href='/code/' + cat.key)= cat.name
+								if cat_i < data.pages.categories.length - 1
+									| , 
+								else
+									|
+						if data.pages.author
+							| by #{data.pages.author.name.first}
+				.pages
+					if data.pages.image.exists
+						.image-wrap: img(src=data.pages._.image.fit(750, 450)).img-responsive
+					!= data.pages.content.full
