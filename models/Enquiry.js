@@ -61,7 +61,7 @@ Enquiry.schema.methods.sendNotificationEmail = function (callback) {
 			to: admins,
 			from: {
 				name: 'Elijah McClendon',
-				email: 'contact@elijah-mcclendon.com',
+				email: 'elijah@fungry.com',
 			},
 			subject: 'New Enquiry for Elijah McClendon',
 			enquiry: enquiry,

@@ -1,31 +1,36 @@
 extends ../layouts/default
 
 block content
-	script(src='/js/ace-editor.js')
-
+	#header
 		style(type='text/css', media='screen').
 			body {
 				overflow: hidden;
 			}
-
-			#editor {
-				margin: 0;
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				left: 0;
-				right: 0;
-			}
+			
 	#body
 		pre#editor.
+			/**
+			* I made the switch from Wordpress to Keystone.js so my site is new and under
+			* constant construction. I am working out an idea for using an Ace Editor
+			* to display content in an iframe so that I can show code I am working with 
+			* along with its output. So for now Ace is gonna sit right here on my
+			* front lawn until I figure out what to do with it next. Also, Codepen.io charges
+			* to embed fully functional editor with iframe. Who pays for something like that?
+			*/
+			
 			function foo(items) {
 				var i;
 				for (i = 0; i < items.length; i++) {
 					alert("Ace Rocks " + items[i]);
 				}
-			}  
-		script(src='/js/ace.js', type='text/javascript', charset='utf-8')
+			}
+		script(src='https://cdn.rawgit.com/ajaxorg/ace-builds/784ffa86/src-min-noconflict/ace.js', type='text/javascript', charset='utf-8')
 		script.
 			var editor = ace.edit("editor");
+<<<<<<< HEAD
 			editor.setTheme("ace/theme/twilight");
 			editor.session.setMode("ace/mode/javascript")
+=======
+			editor.setTheme("ace/theme/tomorrow_night_blue");
+			editor.getSession().setMode("ace/mode/javascript");
+>>>>>>> nope
