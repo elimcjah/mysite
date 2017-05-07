@@ -24,6 +24,6 @@
   "scripts": {
     "lint": "eslint .",
     "start": "nodemon keystone.js",
-    "debug": "node $NODE_DEBUG_OPTION keystone.js "
+    "debug": "DEBUG=express:* nodemon $NODE_DEBUG_OPTION keystone.js "
   }
 }

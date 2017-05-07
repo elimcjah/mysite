@@ -1,0 +1,93 @@
+extends ../layouts/default
+
+block content
+	#header
+		style(type='text/css', media='screen').
+			body {
+				overflow: hidden;
+				margin: 5vh;
+			}
+
+			#heading {
+				text-align: center;
+			}
+
+	#body
+		div#heading
+			h1 Algorithms
+		div#problem
+			h3 Problem
+		div#problemText
+			p. 
+				Compare and update the inventory stored in a 2D array against a second 
+				2D array of a fresh delivery. Update the current existing inventory item 
+				quantities (in arr1). If an item cannot be found, add the new item and 
+				quantity into the inventory array. The returned inventory array should 
+				be in alphabetical order by item.
+		div#solvedInfo
+			p.
+				<strong>Solved</strong> 2016-10-29 
+
+		pre#editor.
+			/**
+			 * @function updateInventory 
+			 * @description Takes an input of an Array of Arrays containing product 
+			 * 		names and quantities for that product as the first param. The second
+			 * 		param is similar Array of arrays containing products and quantities 
+			 * 		to update.
+			 *
+			 * @param {Array} arr1 - The existing inventory items & quantities.
+			 * @param {Array} arr2 - The items being updated in the inventory. 
+			 * @return {Array} Return an updated Inventory list in Alphabetical order.
+			 */
+			function updateInventory (arr1, arr2) {
+				/**
+				 * Loop each array in 2nd argument through the 1st argument. 
+				 * If item exists, sum total then remove that array from 2nd argument.
+				 */
+				for (let i = 0; i < arr2.length; i++) {
+					for (let j = 0; j < arr1.length; j++) {
+						if (arr2[i][1] === arr1[j][1]) {
+							arr1[j][0] = arr1[j][0] + arr2[i][0];
+							arr2.splice(i, 1);
+						}
+					}
+				}
+				/**
+				 * We currently have duplicate items summed and array of non-duplicates.
+				 * Concat the 2 arrays, sort alphabetically by the 2nd item in array.
+				 */
+				arr1 = arr1.concat(arr2).sort(function (a, b) {
+					return a[1] > b[1];
+				});
+				return arr1;
+			}
+
+			/** I set up a test case below */
+			let curInv = [
+				[21, 'Bowling Ball'],
+				[2, 'Dirty Sock'],
+				[1, 'Hair Pin'],
+				[5, 'Microphone'],
+			];
+
+			let newInv = [
+				[2, 'Hair Pin'],
+				[3, 'Half-Eaten Apple'],
+				[67, 'Bowling Ball'],
+				[7, 'Toothpaste'],
+			];
+
+			console.log(updateInventory(curInv, newInv));
+
+				}
+			}
+
+		script(src='https://cdn.rawgit.com/ajaxorg/ace-builds/784ffa86/' +
+		'src-min-noconflict/ace.js', type='text/javascript', charset='utf-8')
+		script.
+			var editor = ace.edit("editor");
+			editor.setTheme("ace/theme/tomorrow_night_blue");
+			editor.getSession().setMode("ace/mode/javascript");
+			document.getElementById('editor').style.fontSize = '14px';
+			

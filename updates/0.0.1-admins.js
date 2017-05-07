@@ -7,11 +7,6 @@
  * module.exports = function(done) { ... }
  */
 
-exports.create = {
-	User: [
-		{ 'name.first': 'Admin', 'name.last': 'User', 'email': 'Elijah@fungry.com', 'password': 'temporary', 'isAdmin': true },
-	],
-};
 
 /*
 
