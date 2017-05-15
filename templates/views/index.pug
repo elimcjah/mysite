@@ -5,7 +5,7 @@ block content
 		style(type='text/css', media='screen').
 			#hi {
 				text-align: center;
-				margin-top: 10%;
+				margin-top: 2%;
 			}
 			
 			#javascript {
@@ -236,12 +236,20 @@ block content
 				background-color: #FFF;
 			}
 			
+			#mypicture {
+				
+				display: block;
+				margin: auto;
+				margin-top: 5%;
+				width: 25%;
+			}
 			
 	#body
+		div#mypicture
+			img.img-responsive(src='/images/whatanerd.png', alt='elimcjah')
 		div#hi
 			h1 Hi, I'm Elijah.
 			h2 I build companies & products.
-			a.btn.btn-primary.btn-lg(href='./contact') Hire Me
 		.container
 			h3#javascript Javascript Frameworks, Libraries, and Tools I Use
 			#grid-container
