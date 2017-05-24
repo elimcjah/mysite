@@ -1,3 +1,3 @@
-### Elijah MCclendon's portfolio 
+### Elijah MCclendon's portfolio page 
 
 ###### Built with Keystone.js
