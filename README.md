@@ -1,3 +1,3 @@
-### My personal site
+### Elijah MCclendon's website 
 
 ###### Built with Keystone.js
