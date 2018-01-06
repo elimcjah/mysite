@@ -1,9 +1,7 @@
-### Elijah MCclendon's portfolio page 
+# Elijah McClendon's Website
 
-###### Built with Keystone.js
+### Description
 
-###### Yep Keystone.js.  An all Javascript CMS for a developer that loves Javascript! 
-
-###### If you want an all JS CMS, email me at Elijah@fungry.com.
+I am using [Keystone JS](http://keystonejs.com/), a CMS framework for javascript.  
 
 

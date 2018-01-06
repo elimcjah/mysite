@@ -1,18 +1,22 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var AutosizeInput = require('react-input-autosize');
+/* eslint-disable react/jsx-no-bind */
 
-var App = React.createClass({
+const React = require('react');
+const ReactDOM = require('react-dom');
+const createClass = require('create-react-class');
+const AutosizeInput = require('react-input-autosize');
+
+const App = createClass({
 	getInitialState () {
 		return {
 			value1: '',
 			value2: 'example',
-			value3: '',
+			value3: 0,
 			value4: '',
+			value5: '',
 		};
 	},
 	updateInputValue (input, event) {
-		var newState = {};
+		const newState = {};
 		newState[input] = event.target.value;
 		this.setState(newState);
 	},
@@ -31,11 +35,17 @@ var App = React.createClass({
 					style={{ background: '#eee', borderRadius: 5, padding: 5 }}
 					inputStyle={{ border: '1px solid #999', borderRadius: 3, padding: 3, fontSize: 14 }}
 				/>
+				<h3>Typed example with default value:</h3>
+				<AutosizeInput
+					value={this.state.value3}
+					type="number"
+					onChange={this.updateInputValue.bind(this, 'value3')}
+				/>
 				<h3>Input with placeholder:</h3>
 				<AutosizeInput
 					placeholder="Placeholder"
-					value={this.state.value3}
-					onChange={this.updateInputValue.bind(this, 'value3')}
+					value={this.state.value4}
+					onChange={this.updateInputValue.bind(this, 'value4')}
 					style={{ background: '#eee', borderRadius: 5, padding: 5 }}
 					inputStyle={{ border: '1px solid #999', borderRadius: 3, padding: 3, fontSize: 14 }}
 				/>
@@ -43,8 +53,8 @@ var App = React.createClass({
 				<AutosizeInput
 					placeholder="Placeholder"
 					placeholderIsMinWidth
-					value={this.state.value4}
-					onChange={this.updateInputValue.bind(this, 'value4')}
+					value={this.state.value5}
+					onChange={this.updateInputValue.bind(this, 'value5')}
 					style={{ background: '#eee', borderRadius: 5, padding: 5 }}
 					inputStyle={{ border: '1px solid #999', borderRadius: 3, padding: 3, fontSize: 14 }}
 				/>

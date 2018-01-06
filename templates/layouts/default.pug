@@ -15,7 +15,7 @@ html
 		//- Customise the stylesheet for your site by editing /public/styles/site.sass
 		link(href="/styles/site.css", rel="stylesheet")
 		link(href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css", rel="stylesheet", integrity="sha384-Xqcy5ttufkC3rBa8EdiAyA1VgOGrmel2Y+wxm4K3kI3fcjTWlDWrlnxyD6hOi3PF", crossorigin="anonymous")
-			
+
 		//- This file provides the default styling for the KeystoneJS Content Editor
 		if user && user.canAccessKeystone
 			link(href="/keystone/styles/content/editor.min.css", rel="stylesheet")
@@ -62,7 +62,7 @@ html
 									li: a(href='/keystone') Open Keystone
 								li: a(href='/keystone/signout') Sign Out
 							else
-								li: a(href='/keystone/signin') Sign In
+								li: a(href='/keystone/signin', style='opacity: 0;') Sign In
 
 		//- BODY
 		#body
@@ -87,7 +87,7 @@ html
 
 			//- You don't _have_ to include a link saying your site is powered by KeystoneJS, but we appreciate it!
 			//- p Powered by <a href="http://keystonejs.com" target="_blank">KeystoneJS</a>.
-				
+
 		//- JAVASCRIPT
 
 		//- jQuery 1.11.3 is included by default, and required by both Bootstrap
@@ -123,7 +123,7 @@ html
 							'https://www.google-analytics.com/analytics.js', 'ga');
 			ga('create', 'UA-99111704-1', 'auto');
 			ga('send', 'pageview');
-			
+
 
 		//- Include template-specific javascript files by extending the js block
 		block js
