@@ -2,4 +2,4 @@
 
 ### Description
 
-Using [Keystone JS](http://keystonejs.com/).
+Using [Keystone JS](http://keystonejs.com/), a CMS framework for javascript.  
