@@ -1,9 +1,7 @@
 import React, { PropTypes } from 'react';
-import { css, StyleSheet } from 'aphrodite/no-important';
-import styles from './styles';
+import { css } from 'glamor';
+import classes from './styles';
 import colors from './colors';
-
-const classes = StyleSheet.create(styles);
 
 function SegmentedControl ({
 	className,
@@ -41,7 +39,7 @@ function SegmentedControl ({
 						type="button"
 						title={cropText ? opt.label : null}
 						tabIndex={opt.disabled ? '-1' : ''}
-						>
+					>
 						{opt.label}
 					</button>
 				);

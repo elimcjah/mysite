@@ -132,12 +132,11 @@ export function deleteItem (id, router) {
 				if (state.lists.page.index && state.lists.page.index > 1) {
 					redirectUrl = `${redirectUrl}?page=${state.lists.page.index}`;
 				}
-				console.log(state, redirectUrl);
 				router.push(redirectUrl);
 			}
 			// TODO Proper error handling
 			if (err) {
-				alert('Error deleting item, please try again!');
+				alert(err.error || 'Error deleting item, please try again!');
 			} else {
 				dispatch(loadItems());
 			}

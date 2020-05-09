@@ -49,14 +49,17 @@ function signinWithUser (user, req, res, onSuccess) {
 	req.session.regenerate(function () {
 		req.user = user;
 		req.session.userId = user.id;
-		// if the user has a password set, store a persistence cookie to resume sessions
+		// if the user has a password set, store a persistent cookie to resume sessions
 		if (keystone.get('cookie signin') && user.password) {
 			var userToken = user.id + ':' + hash(user.password);
 			var cookieOpts = _.defaults({}, keystone.get('cookie signin options'), {
 				signed: true,
 				httpOnly: true,
-				maxAge: 10 * 24 * 60 * 60,
+				maxAge: 10 * 24 * 60 * 60 * 1000,
 			});
+			if (req.session.cookie) {
+				req.session.cookie.maxAge = cookieOpts.maxAge;
+			}
 			res.cookie('keystone.uid', userToken, cookieOpts);
 		}
 		onSuccess(user);
@@ -66,7 +69,7 @@ function signinWithUser (user, req, res, onSuccess) {
 exports.signinWithUser = signinWithUser;
 
 var postHookedSigninWithUser = function (user, req, res, onSuccess, onFail) {
-	keystone.callHook(user, 'post:signin', function (err) {
+	keystone.callHook(user, 'post:signin', req, function (err) {
 		if (err) {
 			return onFail(err);
 		}
@@ -126,7 +129,7 @@ var doSignin = function (lookup, req, res, onSuccess, onFail) {
 };
 
 exports.signin = function (lookup, req, res, onSuccess, onFail) {
-	keystone.callHook({}, 'pre:signin', function (err) {
+	keystone.callHook({}, 'pre:signin', req, function (err) {
 		if (err) {
 			return onFail(err);
 		}

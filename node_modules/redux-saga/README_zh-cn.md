@@ -1,5 +1,6 @@
 # redux-saga
 
+[![Build Status](https://travis-ci.org/redux-saga/redux-saga.svg?branch=master)](https://travis-ci.org/redux-saga/redux-saga)
 [![npm version](https://img.shields.io/npm/v/redux-saga.svg?style=flat-square)](https://www.npmjs.com/package/redux-saga)
 [![CDNJS](https://img.shields.io/cdnjs/v/redux-saga.svg?style=flat-square)](https://cdnjs.com/libraries/redux-saga)
 
@@ -122,7 +123,7 @@ Sagas 工作方式是不一样的，他们不是在Action Creators内被触发�
 
 #A common abstraction: Effect
 
-一般来说，等待一个未知的action，等待像`yield delay(1000)`这样的未知的函数调用结果，或者等待一个调度的结果，这些都是相同的概念。在所有情况下，我们迭代某些形式的Effect。Saga所做的，实际上就是把所有这些Effect组合在一起，去实现期望的控制流。最简单的是一个接着一个的顺序执行yield来迭代Effect。你也可以使用常见的控制操作（if，while，for）去实现更复杂的控制流。或者你可以使用提供的Effect组合去表达并发 (yield race) 和 平行 (yield [...])。你也可以迭代调用其他Saga，允许强大的常规或者子程序模式。
+一般来说，等待一个未知的action，等待像`yield delay(1000)`这样的未知的函数调用结果，或者等待一个调度的结果，这些都是相同的概念。在所有情况下，我们迭代某些形式的Effect。Saga所做的，实际上就是把所有这些Effect组合在一起，去实现期望的控制流。最简单的是一个接着一个的顺序执行yield来迭代Effect。你也可以使用常见的控制操作（if，while，for）去实现更复杂的控制流。或者你可以使用提供的Effect组合去表达并发 (yield race) 和 平行 (yield all([...]))。你也可以迭代调用其他Saga，允许强大的常规或者子程序模式。
 
 举例来说，`incrementAsync` 使用了无限循环 `while(true)`，它意味着这将会在整个应用程序的生命周期都会存在。
 
@@ -280,13 +281,13 @@ const users  = yield call(fetch, '/users'),
 因为第二个Effect将等到第一个执行结束后再执行，我们必须改成如下形式：
 
 ```javascript
-import { call } from 'redux-saga'
+import { call, all } from 'redux-saga/effects'
 
 // correct, effects will get executed in parallel
-const [users, repose]  = yield [
+const [users, repose]  = yield all([
   call(fetch, '/users'),
   call(fetch, '/repose')
-]
+])
 ```
 
 当我们迭代一个Effect数组，生成器是被阻塞的直到所有的Effect都被执行完成(或者当其中有一个被拒绝，就像 `Promise.all`的运行机制 )。
@@ -370,7 +371,7 @@ function* watchFetch() {
 
 ```javascript
 function* mainSaga(getState) {
-  const results = yield [ call(task1), call(task2), ...]
+  const results = yield all([ call(task1), call(task2), ...])
   yield put( showResults(results) )
 }
 ```
@@ -591,7 +592,7 @@ function* subtask2() {
 
 1- 在一个`race` effect。所有的比赛竞争对手，除了胜利者，其它都自动取消。
 
-2- 在一个并行effect (`yield [...]`)。当其中一个子effect失败（于Promise.all相似）， 在这个例子中其他的子effect全部自动取消。
+2- 在一个并行effect (`yield all([...])`)。当其中一个子effect失败（于Promise.all相似）， 在这个例子中其他的子effect全部自动取消。
 
 不同于手动取消，未处理的取消异常不会冒泡到实际saga运行的race/parallel effect。然而，假如取消任务并且没有处理取消异常，一个警告log会写到控制台。
 
