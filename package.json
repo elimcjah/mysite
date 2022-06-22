@@ -6,7 +6,7 @@
     "node": "8.11.x"
   },
   "dependencies": {
-    "async": "^3.2.0",
+    "async": "^3.2.2",
     "dotenv": "^8.2.0",
     "keystone": "^4.2.1",
     "keystone-email": "^1.1.0",
